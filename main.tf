@@ -20,6 +20,10 @@ provider "aws" {
 
 resource "aws_s3_bucket" "state_bucket" {
   bucket = "jackdench-terraform-bucket"
+
+  tags = {
+    "Name" = "jackdench-terraform-bucket"
+  }
 }
 
 resource "aws_s3_bucket_versioning" "versioning_state_bucket" {
