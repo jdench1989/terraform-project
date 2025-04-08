@@ -1,0 +1,36 @@
+name: Terraform Plan
+
+on:
+    pull_request:
+        branches: ["main"]
+
+permissions: 
+    contents: read
+
+jobs:
+    terraform_plan:
+        name: 'Terraform plan'
+        runs-on: ubuntu-latest
+        
+        defaults:
+            run:
+                shell: bash
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup Terraform
+              uses: hashicorp/setup-terraform@v1
+              with:
+                  terraform_version: 1.5.6
+
+            - name: Terraform Init
+              run: terraform init
+
+            - name: Terraform Format
+              run: terraform fmt
+
+            - name: Terraform Plan
+              run: terraform plan -input=false
+
