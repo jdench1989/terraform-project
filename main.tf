@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket = "jackdench-terraform-bucket"
+    bucket = "jackdench-terraform-state-bucket"
     key    = "tfstate"
     region = "eu-west-2"
   }
@@ -19,7 +19,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "state_bucket" {
-  bucket = "jackdench-terraform-bucket"
+  bucket = "jackdench-terraform-state-bucket"
 }
 
 resource "aws_s3_bucket_versioning" "versioning_state_bucket" {
