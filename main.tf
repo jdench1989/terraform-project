@@ -50,6 +50,21 @@ resource "aws_iam_role_policy_attachment" "ec2_full_access" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
 }
 
+resource "aws_iam_role_policy_attachment" "eb_web_tier" {
+  role       = aws_iam_role.task_listing_app_ec2_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkWebTier"
+}
+
+resource "aws_iam_role_policy_attachment" "eb_multi_container_docker" {
+  role       = aws_iam_role.task_listing_app_ec2_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkMulticontainerDocker"
+}
+
+resource "aws_iam_role_policy_attachment" "eb_worker_tier" {
+  role       = aws_iam_role.task_listing_app_ec2_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkWorkerTier"
+}
+
 resource "aws_elastic_beanstalk_application" "task_listing_app" {
   name        = "jackdench-task-listing-app"
   description = "Task listing app"
