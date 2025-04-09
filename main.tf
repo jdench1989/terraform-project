@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket = "jackdench-terraform-state-bucket"
+    bucket = "jackdench-terraform-state-bucket" # Not managed as a tf resource. Make changes manually
     key    = "tfstate"
     region = "eu-west-2"
   }
@@ -16,15 +16,4 @@ terraform {
 
 provider "aws" {
   region = "eu-west-2"
-}
-
-resource "aws_s3_bucket" "state_bucket" {
-  bucket = "jackdench-terraform-state-bucket"
-}
-
-resource "aws_s3_bucket_versioning" "versioning_state_bucket" {
-  bucket = aws_s3_bucket.state_bucket.id
-  versioning_configuration {
-    status = "Enabled"
-  }
 }
