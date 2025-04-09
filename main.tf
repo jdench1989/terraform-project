@@ -96,3 +96,10 @@ resource "aws_elastic_beanstalk_environment" "task_listing_app_environment" {
     value     = "jackdench"
   }
 }
+
+resource "aws_s3_bucket" "container_bucket" {
+  bucket = "jackdench-task-listing-app-container-bucket"
+  tags = {
+    "name" = "jackdench-task-listing-app-container-bucket"
+  }
+}
