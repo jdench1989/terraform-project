@@ -33,14 +33,14 @@ jobs:
               with:
                   terraform_version: 1.5.6
 
+            - name: Terraform Format
+              run: terraform fmt -check
+
             - name: Terraform Init
               run: terraform init
 
-            - name: Terraform Format
-              run: terraform fmt
-
             - name: Terraform Validate
-              run: terraform validate
+              run: terraform validate -json
 
             - name: Terraform Plan
               run: terraform plan -input=false -out=tfplan
