@@ -65,6 +65,11 @@ resource "aws_iam_role_policy_attachment" "eb_worker_tier" {
   policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkWorkerTier"
 }
 
+resource "aws_iam_role_policy_attachment" "ecr_read_only" {
+  role       = aws_iam_role.task_listing_app_ec2_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+}
+
 resource "aws_elastic_beanstalk_application" "task_listing_app" {
   name        = "jackdench-task-listing-app"
   description = "Task listing app"
