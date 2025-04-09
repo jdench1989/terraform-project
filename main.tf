@@ -24,17 +24,12 @@ resource "aws_ecr_repository" "task_listing_app_repository" {
 }
 
 resource "aws_iam_instance_profile" "task_listing_app_ec2_instance_profile" {
-  name = "jackdench-ec2-profile"
-  role = aws_iam_role.ec2_role.name
+  name = "jackdench-task-listing-app-ec2-instance-profile"
+  role = aws_iam_role.task_listing_app_ec2_role.name
 }
 
-resource "aws_iam_role_policy_attachment" "ec2_full_access" {
-  role       = aws_iam_role.ec2_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
-}
-
-resource "aws_iam_role" "ec2_role" {
-  name = "jackdench-ec2-role"
+resource "aws_iam_role" "task_listing_app_ec2_role" {
+  name = "jackdench-task-listing-app-ec2-instance-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -50,6 +45,10 @@ resource "aws_iam_role" "ec2_role" {
   })
 }
 
+resource "aws_iam_role_policy_attachment" "ec2_full_access" {
+  role       = aws_iam_role.task_listing_app_ec2_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
+}
 
 resource "aws_elastic_beanstalk_application" "task_listing_app" {
   name        = "jackdench-task-listing-app"
