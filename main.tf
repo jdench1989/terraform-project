@@ -103,3 +103,16 @@ resource "aws_s3_bucket" "container_bucket" {
     "name" = "jackdench-task-listing-app-container-bucket"
   }
 }
+
+resource "aws_db_instance" "rds_app" {
+  allocated_storage   = 10
+  engine              = "postgres"
+  engine_version      = "15.7"
+  instance_class      = "db.t3.micro"
+  identifier          = "jackdench-task-listing-app-prod"
+  db_name             = "jackdenchappdb"
+  username            = "root"
+  password            = "password"
+  skip_final_snapshot = true
+  publicly_accessible = true
+}
