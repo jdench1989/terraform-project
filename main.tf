@@ -17,3 +17,8 @@ terraform {
 provider "aws" {
   region = "eu-west-2"
 }
+
+resource "aws_ecr_repository" "task_listing_app_repository" {
+  name = "jackdench-task-app-repository"
+  
+}
