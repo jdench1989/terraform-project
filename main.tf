@@ -20,5 +20,5 @@ provider "aws" {
 
 resource "aws_ecr_repository" "task_listing_app_repository" {
   name = "jackdench-task-app-repository"
-  
+
 }
