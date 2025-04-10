@@ -87,6 +87,30 @@ resource "aws_elastic_beanstalk_environment" "task_listing_app_environment" {
     name      = "EC2KeyName"
     value     = "jackdench"
   }
+
+    setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name = "DB_USER"
+    value = aws_db_instance.rds_app.username
+  }
+
+    setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name = "DB_PASSWORD"
+    value = aws_db_instance.rds_app.password
+  }
+
+    setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name = "DB_DATABASE"
+    value = aws_db_instance.rds_app.db_name
+  }
+
+    setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name = "DB_HOST"
+    value = aws_db_instance.rds_app.address
+  }
 }
 
 resource "aws_s3_bucket" "container_bucket" {
