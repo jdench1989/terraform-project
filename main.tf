@@ -88,28 +88,28 @@ resource "aws_elastic_beanstalk_environment" "task_listing_app_environment" {
     value     = "jackdench"
   }
 
-    setting {
+  setting {
     namespace = "aws:elasticbeanstalk:application:environment"
-    name = "DB_USER"
-    value = aws_db_instance.rds_app.username
+    name      = "DB_USER"
+    value     = aws_db_instance.rds_app.username
   }
 
-    setting {
+  setting {
     namespace = "aws:elasticbeanstalk:application:environment"
-    name = "DB_PASSWORD"
-    value = aws_db_instance.rds_app.password
+    name      = "DB_PASSWORD"
+    value     = aws_db_instance.rds_app.password
   }
 
-    setting {
+  setting {
     namespace = "aws:elasticbeanstalk:application:environment"
-    name = "DB_DATABASE"
-    value = aws_db_instance.rds_app.db_name
+    name      = "DB_DATABASE"
+    value     = aws_db_instance.rds_app.db_name
   }
 
-    setting {
+  setting {
     namespace = "aws:elasticbeanstalk:application:environment"
-    name = "DB_HOST"
-    value = aws_db_instance.rds_app.address
+    name      = "DB_HOST"
+    value     = aws_db_instance.rds_app.address
   }
 }
 
