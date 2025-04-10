@@ -45,30 +45,22 @@ resource "aws_iam_role" "task_listing_app_ec2_role" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "ec2_full_access" {
-  role       = aws_iam_role.task_listing_app_ec2_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
+locals {
+  policies = {
+    ec2_full_access           = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
+    eb_web_tier               = "arn:aws:iam::aws:policy/AWSElasticBeanstalkWebTier"
+    eb_multi_container_docker = "arn:aws:iam::aws:policy/AWSElasticBeanstalkMulticontainerDocker"
+    eb_worker_tier            = "arn:aws:iam::aws:policy/AWSElasticBeanstalkWorkerTier"
+    ecr_read_only             = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+  }
 }
 
-resource "aws_iam_role_policy_attachment" "eb_web_tier" {
+resource "aws_iam_role_policy_attachment" "task_listing_app_policies" {
+  for_each   = local.policies
   role       = aws_iam_role.task_listing_app_ec2_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkWebTier"
+  policy_arn = each.value
 }
 
-resource "aws_iam_role_policy_attachment" "eb_multi_container_docker" {
-  role       = aws_iam_role.task_listing_app_ec2_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkMulticontainerDocker"
-}
-
-resource "aws_iam_role_policy_attachment" "eb_worker_tier" {
-  role       = aws_iam_role.task_listing_app_ec2_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkWorkerTier"
-}
-
-resource "aws_iam_role_policy_attachment" "ecr_read_only" {
-  role       = aws_iam_role.task_listing_app_ec2_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
-}
 
 resource "aws_elastic_beanstalk_application" "task_listing_app" {
   name        = "jackdench-task-listing-app"
